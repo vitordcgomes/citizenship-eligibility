@@ -14,15 +14,15 @@ mae(josefina, carlos).
 
 avo(X, Y):- (pai(X,Z); mae(X, Z)), (pai(Z, Y); mae(Z, Y)), (X \= Y, X \= Z, Y \= Z).
 
+descendente(X, Y) :- (pai(Y, X); mae(Y, X)); (pai(Z, X); mae(Z, X)), descendente(Z, Y).
+
 tem_direito(X, alemanha):- (pai(Y,X); mae(Y, X); avo(Y,X)), cidadania(Y, alema), \+cidadania(X, alema).
 
 tem_direito(X, portugal):- (pai(Y,X); mae(Y, X); avo(Y,X)), cidadania(Y, portuguesa), \+cidadania(X, portuguesa).
 
 tem_direito(X, reino_unido):- (pai(Y,X); mae(Y, X)), cidadania(Y, britanica), \+cidadania(X, britanica).
 
-ascendente(X, Y):- ((pai(X, Y); mae(X, Y)); (pai(X, Z); mae(X, Z))), ascendente(Z, Y).
-
-tem_direito(X, italia):- ascendente(Y, X), cidadania(Y, italiana), \+cidadania(X, italiana).
+tem_direito(X, italia):- descendente(X, Y), cidadania(Y, italiana), \+cidadania(X, italiana).
 
 
 
